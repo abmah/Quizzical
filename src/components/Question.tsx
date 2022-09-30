@@ -1,53 +1,26 @@
-import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { Question as IQuestion } from "../types/questions";
 
-function Question({ question, handleScore }) {
-  const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [markedAsCorrect, setMarkedAsCorrect] = useState(false);
-
-  useEffect(() => {
-    function handleAnswer() {
-      if (selectedAnswer === question.correct_answer) {
-        if (!markedAsCorrect) {
-          console.log("correct");
-          setMarkedAsCorrect(true);
-        }
-      }
-      if (selectedAnswer !== question.correct_answer) {
-        if (markedAsCorrect) {
-          console.log("wrong");
-          setMarkedAsCorrect(false);
-        }
-      }
-    }
-    handleAnswer();
-  }, [selectedAnswer]);
-
-  /* style={{ backgroundColor: !gameEnded ? "#58e09a" : '' }} */
+function Question({ question }: { question: IQuestion }) {
+  const options = useMemo(
+    () =>
+      [...question.incorrect_answers, question.correct_answer].sort(
+        () => 0.5 - Math.random()
+      ),
+    [question.incorrect_answers, question.correct_answer]
+  );
 
   return (
     <div>
-      <p>{question.question}</p>
-      <button
-        onClick={() => setSelectedAnswer(question.correct_answer)}
-        style={{
-          backgroundColor:
-            question.correct_answer === selectedAnswer ? "#ffff80" : "",
-        }}
-      >
-        {question.correct_answer}
-      </button>
-      {question.incorrect_answers.map((inc_answer) => (
-        <button
-          key={nanoid()}
-          onClick={() => setSelectedAnswer(inc_answer)}
-          style={{
-            backgroundColor: inc_answer === selectedAnswer ? "#ffff80" : "",
-          }}
-        >
-          {inc_answer}
-        </button>
-      ))}
+      <p dangerouslySetInnerHTML={{ __html: question.question }} />
+      <div>
+        {options.map((q) => (
+          <div key={q}>
+            <input type="radio" name={question.question} id={q} value={q} />
+            <label htmlFor={q} dangerouslySetInnerHTML={{ __html: q }} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -17,8 +17,9 @@ body {
   padding: 15px;
   font-weight: 800;
   color: #000000;
-  border: 0.771045px solid #4d5b9e;
-  border-radius: 7.71045px;
+  border: 0.75px solid #4d5b9e;
+  border-radius: 7.5px;
+  cursor: pointer;
 }
 
 .action:hover {
@@ -44,4 +45,8 @@ body {
 
 .landing-page > .action {
   width: 100%;
+}
+
+:has(> input[type="radio"]:checked) {
+  color: hsl(60, 100%, 75%);
 }
