@@ -7,47 +7,46 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
-button {
+.action {
   margin-right: 10px;
   margin-top: 10px;
-  font-family: 'Inter', sans-serif;
-  background-color: #F5F7FB;
+  font-family: "Inter", sans-serif;
+  background-color: #f5f7fb;
   padding: 15px;
   font-weight: 800;
   color: #000000;
-  border: 0.771045px solid #4D5B9E;
-  border-radius: 7.71045px;
-
+  border: 0.75px solid #4d5b9e;
+  border-radius: 7.5px;
+  cursor: pointer;
 }
 
-button:hover {
+.action:hover {
   background-color: #d2d5e3;
-
 }
 
-button:active {
+.action:active {
   margin-right: 10px;
   margin-top: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #9b9b9b;
   padding: 15px;
   font-weight: 800;
   color: #000000;
-
-
-
 }
 
-.landing-page {
+.layout {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.landing-page>button {
+.landing-page > .action {
   width: 100%;
+}
+
+:has(> input[type="radio"]:checked) {
+  color: hsl(60, 100%, 75%);
 }
